@@ -1,5 +1,5 @@
 { "name": "npm-test-npmrc-evil-postinstall",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A test package for whether I can trick a package manager into installing the postinstall script.",
   "keywords": [],
 
@@ -17,8 +17,8 @@
   "private": true, "license": "ISC",
 
   "scripts": {
-    "postinstall": "cp evil.js index.js",
-    "test": "elp && nodejs test.js"
+    "postinstall": "cp -- evil.js index.js",
+    "test": "elp && echo -n '# node ' && node --version && echo -n '# npm  v' && npm --version && npm config list | sed -nre '/config from|scripts/s~^~# npm config: ~p' && node test.js"
   },
   "directories": { "test": "test" },
   "eslintConfig": { "extends": "nodejs-pmb" },

@@ -1,0 +1,59 @@
+%YAML 1.1
+# ^-- ATTN: [2019-12-31] If you use a later version, Github will fail
+#     with a bogus error message "You have an error in your yaml syntax".
+# -*- coding: UTF-8, tab-width: 2 -*-
+---
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  test_npm:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        npm_version:
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - 'latest'
+        node_version:
+          - '8.x'
+          - '12.x'
+          - '16.x'
+          - '20.x'
+        npm_install_opt:
+          - ''
+          - ' --ignore-scripts=true'
+      fail-fast: False
+
+    name: 'npm ${{ matrix.npm_version }} ${{ matrix.npm_install_opt }} | node ${{ matrix.node_version }}'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mk-pmb/github-ci-util-2405-pmb/act/install@v1
+        with:
+          nodejs_version: ${{ matrix.node_version }}
+          npm_version: ${{ matrix.npm_version }}
+
+      - run: ghciu npm config --location=user set ignore-scripts=true
+      - run: ghciu npm install ${{ matrix.npm_install_opt }} .
+      - run: ghciu npm test
+
+
+
+
+
+
+
+
+
+
+
+...
