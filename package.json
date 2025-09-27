@@ -1,0 +1,36 @@
+{ "name": "npm-test-npmrc-evil-postinstall",
+  "version": "0.0.0",
+  "description": "A test package for whether I can trick a package manager into installing the postinstall script.",
+  "keywords": [],
+
+  "author": "M.K. (https://github.com/mk-pmb)",
+  "homepage": "https://github.com/mk-pmb/npm-test-npmrc-evil-postinstall/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mk-pmb/npm-test-npmrc-evil-postinstall.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mk-pmb/npm-test-npmrc-evil-postinstall/issues"
+  },
+  "contributors": [],
+
+  "private": true, "license": "ISC",
+
+  "scripts": {
+    "postinstall": "cp evil.js index.js",
+    "test": "elp && nodejs test.js"
+  },
+  "directories": { "test": "test" },
+  "eslintConfig": { "extends": "nodejs-pmb" },
+
+  "dependencies": {},
+  "devDependencies": {
+    "eslint-config-nodejs-pmb": "^0.3.10",
+    "eslint-plugin-json-light-pmb": "^1.0.7",
+    "eslint-plugin-n": "^17.16.2",
+    "eslint-pretty-pmb": "^1.0.7"
+  },
+
+
+  "engines": { "npm": ">=7.0.0", "node": ">=16.0.0" }
+}
